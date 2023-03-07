@@ -1,0 +1,786 @@
+@charset "UTF-8";
+/***
+    The new CSS reset - version 1.8.4 (last updated 14.2.2023)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a, button {
+    cursor: revert;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol, ul, menu {
+    list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+input, textarea {
+  -webkit-user-select: auto;
+}
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  -moz-appearance: revert;
+       appearance: revert;
+}
+
+/* preformatted text - use only for this feature */
+:where(pre) {
+  all: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::-webkit-input-placeholder {
+  color: unset;
+}
+::-moz-placeholder {
+  color: unset;
+}
+:-ms-input-placeholder {
+  color: unset;
+}
+::-ms-input-placeholder {
+  color: unset;
+}
+::placeholder {
+  color: unset;
+}
+
+/* remove default dot (•) sign */
+::marker {
+  content: initial;
+}
+
+/* fix the feature of 'hidden' attribute.
+   display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+   - fix for the content editable attribute will work properly.
+   - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable=false])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-user-select: auto;
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable=true]) {
+  -webkit-user-drag: element;
+}
+
+/* Revert Modal native behavior */
+:where(dialog:modal) {
+  all: revert;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #181818;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.page {
+  overflow: hidden;
+}
+
+.header {
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(100% - 300px);
+  background-color: #0d0d0d;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header_left {
+  width: 60%;
+}
+
+.header_right {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
+  width: 60%;
+}
+
+.nav_list {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav_item {
+  position: relative;
+}
+.nav_item:hover .nav_link {
+  background-color: #3137C9;
+}
+.nav_item:hover > .subnav {
+  display: block;
+}
+
+.nav_link {
+  display: block;
+  padding: 1.5rem 1rem;
+  font-size: 1.1rem;
+  color: #fff;
+  text-transform: uppercase;
+  transition: background-color 0.3 linear;
+}
+.nav_link.has-subnav {
+  position: relative;
+  padding-right: 2.7rem;
+}
+.nav_link.has-subnav::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 46%;
+  right: 1.35rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: #fff transparent transparent transparent;
+}
+
+.subnav {
+  display: none;
+  width: 165px;
+  background-color: #3137C9;
+  border-radius: 0 0 5px 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.subnav_link {
+  display: block;
+  padding: 0.65rem 1.2rem;
+  font-size: 1.2rem;
+}
+.subnav_link:hover {
+  background-color: #2b2fa9;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000000000;
+  background-color: #202020;
+  box-shadow: 5px 0 15px rgba(5, 5, 5, 0.1);
+  width: 300px;
+  height: 100vh;
+}
+
+.sidebar_header {
+  height: 180px;
+  background-color: #121212;
+}
+.sidebar_header img {
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.sidebar_content {
+  padding: 0 2rem;
+  position: relative;
+  margin-top: -50px;
+}
+
+.sidebar_footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.main {
+  padding: 10rem 0 8rem 300px;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.profile_avatar {
+  margin: 0 auto;
+  display: block;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.25);
+}
+
+.profile_name {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 21px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.profile_prof {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 16px;
+  text-align: center;
+  padding-top: 3px;
+  margin-bottom: 2rem;
+}
+
+.profile_text {
+  padding: 3rem 0;
+  margin: 3rem 0;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 18px;
+  /* or 150% */
+  text-align: center;
+  border-top: 1px solid #1c1c1c;
+  border-bottom: 1px solid #1c1c1c;
+}
+
+.social {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.social_item {
+  margin: 0 0.75rem;
+}
+
+.btn {
+  display: inline-block;
+  vertical-align: top;
+  padding: 1.1em 2.1em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background-color: #121212;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.btn--red {
+  background: #ED3024;
+  box-shadow: 0px 7px 17px -10px rgba(242, 63, 63, 0.2);
+}
+.btn--blue {
+  background: #3137C9;
+  box-shadow: 0px 7px 17px -10px rgba(242, 63, 63, 0.2);
+}
+.btn--rounded {
+  border-radius: 0.41em;
+}
+.btn--sm {
+  padding: 0.66em 1.25em;
+}
+
+.search {
+  background: #202020;
+  box-shadow: -7px 1px 10px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  width: 21rem;
+}
+
+.search_input {
+  display: block;
+  padding: 1.2rem 2rem;
+  width: 100%;
+}
+.search_input::-webkit-input-placeholder {
+  font-family: "Roboto";
+  color: rgba(255, 255, 255, 0.4);
+}
+.search_input::-moz-placeholder {
+  font-family: "Roboto";
+  color: rgba(255, 255, 255, 0.4);
+}
+.search_input:-ms-input-placeholder {
+  font-family: "Roboto";
+  color: rgba(255, 255, 255, 0.4);
+}
+.search_input::-ms-input-placeholder {
+  font-family: "Roboto";
+  color: rgba(255, 255, 255, 0.4);
+}
+.search_input::placeholder {
+  font-family: "Roboto";
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.stories {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-template-rows: 195px;
+  margin-bottom: 3rem;
+}
+
+.stories_item {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.stories_item::after {
+  content: " ";
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 52.08%, rgba(0, 0, 0, 0.406154) 76.41%, rgba(0, 0, 0, 0.8) 100%), url(.jpg);
+  -webkit-filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.2));
+          filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.2));
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.stories_item:hover .stories_preview {
+  -webkit-transform: scale(2);
+          transform: scale(2);
+}
+
+.stories_item img {
+  height: 195px;
+  width: 145px;
+}
+
+.stories_preview {
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.stories_title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  padding-top: 14px;
+  padding-left: 13px;
+  padding-right: 17px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.stories_date {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding-left: 48px;
+  padding-right: 17px;
+  padding-bottom: 14px;
+  color: white;
+}
+
+.add_post {
+  padding: 1.5rem 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.45);
+  border-radius: 5px;
+}
+
+.add_post__form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.add_post__textarea {
+  -ms-flex: 1;
+      flex: 1;
+  width: 70%;
+  height: 26px;
+  font-size: 1.5rem;
+}
+.add_post__textarea::-webkit-input-placeholder {
+  color: #d2d2d2;
+}
+.add_post__textarea::-moz-placeholder {
+  color: #d2d2d2;
+}
+.add_post__textarea:-ms-input-placeholder {
+  color: #d2d2d2;
+}
+.add_post__textarea::-ms-input-placeholder {
+  color: #d2d2d2;
+}
+.add_post__textarea::placeholder {
+  color: #d2d2d2;
+}
+
+.add_post__file {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ccc url("../images/photo 1.svg") center no-repeat;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.add_post__file input {
+  display: none;
+}
+
+.add_post__btn {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: blue;
+  background: blue url("../images/send btn 1.svg") center no-repeat;
+  cursor: pointer;
+}
+
+.post {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: #202020;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.35);
+  border-radius: 5px;
+}
+
+.post__actions {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 14px;
+}
+.post__actions a:hover {
+  text-decoration: underline;
+}
+
+.post__title {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+.post__title--mb0 {
+  margin-bottom: 4px;
+}
+
+.post__content {
+  margin-bottom: 2rem;
+}
+
+.post__data {
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #828282;
+}
+
+.post__header {
+  margin: 0 0 2.5rem;
+}
+.post__header--preview {
+  margin: -2.5rem -2.5rem 2.5rem;
+}
+
+.post__data-item:not(:last-child):after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #c6c6c6;
+  margin: 0 1.5rem;
+}
+
+.post__footer {
+  position: relative;
+}
+
+.post__read {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: #107EFF;
+}
+
+.post__video {
+  position: relative;
+}
+
+.post__actions-icon {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.post__description {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.post__text {
+  border-bottom: 1px solid rgb(87, 87, 87);
+}
+.post__text h2 {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.post__text ul, .post__text ol {
+  margin-bottom: 2rem;
+}
+.post__text ol {
+  list-style: decimal;
+  list-style-position: inside;
+}
+.post__text table {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+.post__text img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.post__text p {
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  margin-top: 8rem;
+}
+
+.pagination__item {
+  margin: 0 0.5rem;
+}
+
+.pagination__link {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: #0d0d0d;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 3px;
+}
+.pagination__link:hover {
+  background-color: #1a1a1a;
+}
+.pagination__link.active {
+  background-color: blue;
+}
+
+.related {
+  padding: 3rem 0 0.5rem;
+  border-bottom: 1px solid rgb(87, 87, 87);
+}
+.related ul {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex: 1Z;
+      flex: 1Z;
+}
+
+.related__title {
+  margin-bottom: 19px;
+  font-weight: 500;
+}
+
+.related__list-item {
+  width: 50%;
+  margin-bottom: 2.5rem;
+}
+
+.related__list-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #f3eba2;
+}
+.related__list-title a {
+  color: inherit;
+}
+
+.related__list-date {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #828282;
+}
+
+.comments {
+  margin-top: 3rem;
+}
+
+.comments__title {
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.comment__item {
+  margin-top: 5rem;
+}
+.comment__item > .comment {
+  padding-top: -1.5rem;
+  padding-left: 5.5rem;
+}
+
+.comment__header {
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1.5rem;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.comment__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.comment__author {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  padding-left: 1.5rem;
+}
+
+.comment__pubdate {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #757575;
+}
+
+.comment__reply {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #107EFF;
+  cursor: pointer;
+  padding-top: 0.5rem;
+}
+
+.form__group {
+  margin-bottom: 1.5rem;
+}
+
+.form__control {
+  display: block;
+  font-size: 1.4rem;
+  color: white;
+  width: 100%;
+  height: 23px;
+  border-bottom: 1px solid #3F3F3F;
+}
+.form__control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.252);
+}
+.form__control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.252);
+}
+.form__control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.252);
+}
+.form__control::-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.252);
+}
+.form__control::placeholder {
+  color: rgba(255, 255, 255, 0.252);
+}
+
+.comment {
+  margin-top: 5px;
+}
